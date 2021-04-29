@@ -5,6 +5,13 @@ import {EmptyLane} from "./emptyLane";
 import {LaneItem} from "./laneItem";
 import {Stack} from "./stack";
 import {AddTaskButton} from "./addTaskButton";
+import styled from "styled-components";
+
+const AddTaskButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
 
 type Props = {
     items: Array<BoardItem>
@@ -20,7 +27,9 @@ export const Lane = ({title, items}: Props) => {
         {items.length ?
             <>
                 {items.map((item, index) => <LaneItem item={item} key={index}/> )}
-                <AddTaskButton />
+                <AddTaskButtonContainer>
+                    <AddTaskButton />
+                </AddTaskButtonContainer>
             </>
             : <EmptyLane />
         }
