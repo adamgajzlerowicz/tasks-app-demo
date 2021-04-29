@@ -1,7 +1,14 @@
 import * as React from 'react'
-import { BsCheckCircle } from 'react-icons/bs'
 import {LaneHeader} from "./laneHeader";
 import {BoardItem} from "../types";
+import {EmptyLane} from "./emptyLane";
+import {LaneItem} from "./laneItem";
+import styled from "styled-components";
+import {mediumSize} from "../../design-system";
+
+const LaneContainer = styled.div`
+  margin-top: ${mediumSize};
+`
 
 type Props = {
     items: Array<BoardItem>
@@ -9,9 +16,12 @@ type Props = {
 }
 
 export const Lane = ({title, items}: Props) => {
-    return <div>
+    return <LaneContainer>
         <LaneHeader title={title} />
+        {items.length ?
+            items.map((item, index) => <LaneItem item={item} key={index}/>)
+            : <EmptyLane />
+        }
 
-        <BsCheckCircle/>
-    </div>
+    </LaneContainer>
 }
