@@ -12,13 +12,17 @@ const LaneHeaderActions = styled.div`
   
 `
 
+const Header = styled.h4`
+  font-weight: 500;
+`
+
 type Props = {
     title: string
 }
 
 export const LaneHeader = ({ title }: Props) => {
     return <LaneHeaderContainer>
-        <h4>{title}</h4>
+        <Header>{title}</Header>
         <LaneHeaderActions>
             <BsPlus /> <BsThreeDots /> <BsLightningFill fill={colors.gold}/>
         </LaneHeaderActions>

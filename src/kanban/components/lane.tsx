@@ -3,12 +3,8 @@ import {LaneHeader} from "./laneHeader";
 import {BoardItem} from "../types";
 import {EmptyLane} from "./emptyLane";
 import {LaneItem} from "./laneItem";
-import styled from "styled-components";
-import {mediumSize} from "../../design-system";
-
-const LaneContainer = styled.div`
-  margin-top: ${mediumSize};
-`
+import {Stack} from "./stack";
+import {AddTaskButton} from "./addTaskButton";
 
 type Props = {
     items: Array<BoardItem>
@@ -16,12 +12,18 @@ type Props = {
 }
 
 export const Lane = ({title, items}: Props) => {
-    return <LaneContainer>
+    return <div>
         <LaneHeader title={title} />
+
+        <Stack/>
+
         {items.length ?
-            items.map((item, index) => <LaneItem item={item} key={index}/>)
+            <>
+                {items.map((item, index) => <LaneItem item={item} key={index}/> )}
+                <AddTaskButton />
+            </>
             : <EmptyLane />
         }
 
-    </LaneContainer>
+    </div>
 }
