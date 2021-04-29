@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { BsCheckCircle } from 'react-icons/bs'
 import {LaneHeader} from "./laneHeader";
+import {BoardItem} from "../types";
 
 type Props = {
-    items: Array<string>
+    items: Array<BoardItem>
     title: string
 }
 

@@ -2,6 +2,7 @@ import * as React from 'react'
 import styled from "styled-components";
 import {mediumSize} from "../design-system";
 import {Lane} from "./components/lane";
+import {BoardItem } from "./types";
 
 const Container = styled.div`
   padding: ${mediumSize}px;
@@ -12,7 +13,15 @@ const Container = styled.div`
 `
 
 export const Kanban = () => {
-    const items = ['foo', 'bar']
+    const items: Array<BoardItem> = [{
+        title: "foo",
+        completed: false,
+        lane: "candidates"
+    }, {
+        title: "bar",
+        completed: true,
+        lane: "inProgress"
+    }]
     return <Container>
         <Lane title="Candidates" items={items}/>
         <Lane title="In Progress" items={items}/>
