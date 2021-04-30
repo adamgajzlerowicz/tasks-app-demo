@@ -5,7 +5,6 @@ import {BsPlus} from "react-icons/bs";
 
 const Heading = styled.h5`
   color: ${colors.gray};
-  font-weight: 500;
   display: flex;
   position: relative;
   align-content: center;
