@@ -17,13 +17,8 @@ const Container = styled.div`
 `
 
 export const Kanban = () => {
-    const usedBoard = 'gmcMohbh9a4GSVFDivFv'
-
-
-
-
     return <Container>
-        <CandidatesLane board={usedBoard}/>
+        <CandidatesLane />
         <Lane title="In Progress" items={[]}/>
         <Lane title="QA / Code review" items={[]}/>
         <Lane title="Completed" items={[]}/>

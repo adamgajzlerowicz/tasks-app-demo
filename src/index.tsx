@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Kanban} from "./kanban/kanban";
 import { createGlobalStyle } from 'styled-components'
 import firebase from 'firebase'
 
 import './index.css'
+import {App} from "./kanban/components/app";
 
 firebase.initializeApp({
     apiKey: "AIzaSyBY8dOhtotTEc8LblVNHxjW2Et2TFlj4UM",
@@ -27,7 +27,7 @@ const CSSReset = createGlobalStyle`
 ReactDOM.render(
     <React.StrictMode>
         <CSSReset />
-        <Kanban />
+        <App />
     </React.StrictMode>,
     document.getElementById('root')
 );

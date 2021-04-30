@@ -1,9 +1,10 @@
 import * as React from 'react'
 import {BoardItem} from "../types";
-import {BsCheckCircle} from "react-icons/bs";
+import {BsArrowLeft, BsArrowRight, BsCheckCircle} from "react-icons/bs";
 import styled from "styled-components";
 import {borderRadius, colors, mediumSize} from "../../design-system";
 import {RawButton} from "./rawButton";
+import {useClick} from "../utils";
 
 const LaneItemContainer = styled.div`
   padding: ${mediumSize}px;
@@ -24,23 +25,26 @@ const CircleIcon = styled(BsCheckCircle)`
   margin-right: ${mediumSize/2}px;
 `
 
+const Editable = styled(RawButton)`
+  flex: 1
+`
+
 type Props = {
     item: BoardItem
 }
 
 export const LaneItem = ({ item }: Props) => {
     const [isEditing, setIsEditing] = React.useState(false)
+    const edit = useClick(() => {
+        setIsEditing(true)
+    })
 
     return <LaneItemContainer>
         <LaneItemInner>
             <CircleIcon color={colors.gray2}/>
-            <RawButton
-                onClick={(e) => {
-                    if (!isEditing && e.detail === 2) { // 2 = double click
-                        setIsEditing(true)
-                    }
-                }
-                }>
+            <Editable
+                onClick={edit}
+            >
                 <div
                     contentEditable={isEditing}
                     onBlur={(e) => {
@@ -50,7 +54,10 @@ export const LaneItem = ({ item }: Props) => {
                     suppressContentEditableWarning={true}>
                     {item.title}
                 </div>
-            </RawButton>
+            </Editable>
+
+            <RawButton><BsArrowLeft/></RawButton>
+            <RawButton><BsArrowRight/></RawButton>
         </LaneItemInner>
     </LaneItemContainer>
 }
