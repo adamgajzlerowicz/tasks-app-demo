@@ -1,11 +1,8 @@
 import * as React from 'react'
 import styled from "styled-components";
 import {colors, mediumSize} from "../design-system";
-import firebase from 'firebase'
 import {Lane} from "./components/lane";
-import { useCollection } from 'react-firebase-hooks/firestore';
-import {BoardItem } from "./types";
-import {Loading} from "./components/loading";
+import {CandidatesLane} from "./components/candidatesLane";
 
 const Container = styled.div`
   padding-top: ${mediumSize}px;
@@ -19,39 +16,16 @@ const Container = styled.div`
   min-height: 100vh;
 `
 
-const LoadingWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  height: 100vh;
-  align-content: center;
-  justify-content: center;
-  flex-direction: column;
-`
-
 export const Kanban = () => {
-    const [data, loading, error] = useCollection(
-        firebase.firestore().collection('boards').doc('gmcMohbh9a4GSVFDivFv').collection('tasks'),
-        {
-            snapshotListenOptions: { includeMetadataChanges: true },
-        }
-    );
-
-    if (loading) {
-        return <LoadingWrapper><Loading/></LoadingWrapper>
-    }
+    const usedBoard = 'gmcMohbh9a4GSVFDivFv'
 
 
-    const items: Array<BoardItem> = [{
-        title: "foo",
-        lane: "candidates"
-    }, {
-        title: "bar",
-        lane: "inProgress"
-    }]
+
+
     return <Container>
-        <Lane title="Candidates" items={items}/>
+        <CandidatesLane board={usedBoard}/>
         <Lane title="In Progress" items={[]}/>
-        <Lane title="QA / Code review" items={items}/>
+        <Lane title="QA / Code review" items={[]}/>
         <Lane title="Completed" items={[]}/>
     </Container>
 }
