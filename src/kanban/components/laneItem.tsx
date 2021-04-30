@@ -4,7 +4,6 @@ import {BsArrowLeft, BsArrowRight, BsCheckCircle} from "react-icons/bs";
 import styled from "styled-components";
 import {borderRadius, colors, mediumSize} from "../../design-system";
 import {RawButton} from "./rawButton";
-import {useClick} from "../utils";
 
 const LaneItemContainer = styled.div`
   padding: ${mediumSize}px;
@@ -34,29 +33,34 @@ type Props = {
 }
 
 export const LaneItem = ({ item }: Props) => {
-    const [isEditing, setIsEditing] = React.useState(false)
-    const edit = useClick(() => {
-        setIsEditing(true)
-    })
+    const [isEditable, setIsEditable] = React.useState(false)
+    const textRef = React.useRef(null)
 
     return <LaneItemContainer>
         <LaneItemInner>
             <CircleIcon color={colors.gray2}/>
             <Editable
-                onClick={edit}
-            >
-                <div
-                    contentEditable={isEditing}
-                    onBlur={(e) => {
-                        setIsEditing(false)
-                        console.log(e.currentTarget.textContent)
-                    }}
-                    suppressContentEditableWarning={true}>
-                    {item.title}
-                </div>
+                ref={textRef}
+                onClick={() => {
+                    setIsEditable(true)
+                    setTimeout(function() {
+                        if (document.activeElement !== textRef.current) {
+                            setIsEditable(false)
+                        }
+                    }, 500);
+                }}
+                contentEditable={isEditable}
+                suppressContentEditableWarning={true}
+                onBlur={(e) => {
+                    setIsEditable(false)
+                    console.log(e.currentTarget.textContent)
+                }}
+                >
+                {item.title}
             </Editable>
 
             <RawButton><BsArrowLeft/></RawButton>
+
             <RawButton><BsArrowRight/></RawButton>
         </LaneItemInner>
     </LaneItemContainer>
