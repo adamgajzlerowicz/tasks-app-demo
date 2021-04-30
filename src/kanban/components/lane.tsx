@@ -7,6 +7,12 @@ import {Stack} from "./stack";
 import {AddTaskButton} from "./addTaskButton";
 import styled from "styled-components";
 
+const LaneContainer = styled.div`
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+`
+
 const AddTaskButtonContainer = styled.div`
   width: 100%;
   display: flex;
@@ -19,7 +25,7 @@ type Props = {
 }
 
 export const Lane = ({title, items}: Props) => {
-    return <div>
+    return <LaneContainer>
         <LaneHeader title={title} />
 
         <Stack/>
@@ -34,5 +40,5 @@ export const Lane = ({title, items}: Props) => {
             : <EmptyLane />
         }
 
-    </div>
+    </LaneContainer>
 }

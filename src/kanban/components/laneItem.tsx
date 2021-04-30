@@ -11,8 +11,12 @@ const LaneItemContainer = styled.div`
    margin-bottom: ${mediumSize}px;
    min-height: 100px;
    box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+`
+
+const LaneItemInner = styled.div`
    display: flex;
    flex-direction: row;
+   align-content: center;
 `
 
 const CircleIcon = styled(BsCheckCircle)`
@@ -24,8 +28,10 @@ type Props = {
 }
 
 export const LaneItem = ({ item }: Props) => {
-   return <LaneItemContainer>
-      <CircleIcon color={colors.gray2}/>
-      {item.title}
-   </LaneItemContainer>
+    return <LaneItemContainer>
+        <LaneItemInner>
+            <CircleIcon color={colors.gray2}/>
+            {item.title}
+        </LaneItemInner>
+    </LaneItemContainer>
 }

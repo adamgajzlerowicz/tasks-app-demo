@@ -11,6 +11,7 @@ const Container = styled.div`
   grid-template-columns:repeat(4, 1fr);
   gap: ${mediumSize*2}px;
   background-color: ${colors.background};
+  min-height: 600px;
 `
 
 export const Kanban = () => {
