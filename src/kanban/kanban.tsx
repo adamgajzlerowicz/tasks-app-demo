@@ -5,6 +5,7 @@ import firebase from 'firebase'
 import {Lane} from "./components/lane";
 import { useCollection } from 'react-firebase-hooks/firestore';
 import {BoardItem } from "./types";
+import {Loading} from "./components/loading";
 
 const Container = styled.div`
   padding-top: ${mediumSize}px;
@@ -18,6 +19,15 @@ const Container = styled.div`
   min-height: 100vh;
 `
 
+const LoadingWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+`
+
 export const Kanban = () => {
     const [data, loading, error] = useCollection(
         firebase.firestore().collection('boards').doc('gmcMohbh9a4GSVFDivFv').collection('tasks'),
@@ -27,7 +37,7 @@ export const Kanban = () => {
     );
 
     if (loading) {
-        return <div>loading</div>
+        return <LoadingWrapper><Loading/></LoadingWrapper>
     }
 
 
