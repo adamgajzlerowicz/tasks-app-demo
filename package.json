@@ -52,6 +52,7 @@
   },
   "devDependencies": {
     "@types/react-select": "^4.0.15",
-    "@types/styled-components": "^5.1.9"
+    "@types/styled-components": "^5.1.9",
+    "prettier": "^2.2.1"
   }
 }

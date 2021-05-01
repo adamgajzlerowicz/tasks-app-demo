@@ -1,7 +1,7 @@
 import * as React from 'react'
 import {Kanban} from "../kanban";
 import Select from 'react-select'
-import {BoardContext} from "../utils";
+import {BoardContext, makeBoardOption} from "../utils";
 import {useBoardList} from "../queries";
 import {Loading} from "./loading";
 
@@ -9,14 +9,9 @@ export const App = () => {
     const [boardData, loading] = useBoardList()
     const [selectedBoard, setSelectedBoard] = React.useState<string>()
 
-    // TODO test
     const boardOptions = boardData?.docs.map(board => {
         const itemData = board.data()
-        const label = `${itemData.title} (${itemData.num_tasks} tasks)`
-        return {
-            value: board.id,
-            label
-        }
+        return makeBoardOption(itemData)
     })
 
     React.useEffect(() => {
