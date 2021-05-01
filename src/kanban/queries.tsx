@@ -52,7 +52,7 @@ export const useUpdateTask = (id: string) => {
             .doc(board)
             .collection('tasks')
             .doc(id)
-            .set(data)
+            .update(data)
     ,[board, id])
 }
 

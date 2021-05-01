@@ -21,7 +21,7 @@ export const MoveLeft = ({ id }: Props) => {
     return <RawButton onClick={() => {
         if (data?.currentLane) {
             const newLane = lanes[lanes.indexOf(data.currentLane) -1] // TODO test
-            editItem({ ...data, currentLane: newLane })
+            editItem({ currentLane: newLane })
         }
     }}><BsArrowLeft/></RawButton>
 
