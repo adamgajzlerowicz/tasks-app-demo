@@ -11,7 +11,7 @@ export const App = () => {
 
     const boardOptions = boardData?.docs.map(board => {
         const itemData = board.data()
-        return makeBoardOption(itemData)
+        return makeBoardOption({ ...itemData, id: board.id })
     })
 
     React.useEffect(() => {
@@ -22,6 +22,7 @@ export const App = () => {
 
 
     if (loading || !boardData || !selectedBoard || !boardOptions) {
+        // console.log(loading ,boardData , selectedBoard , boardOptions);
         return <Loading />
     }
 
