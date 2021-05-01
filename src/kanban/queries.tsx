@@ -1,8 +1,18 @@
 import * as React from 'react'
 import {useCollection, useDocumentData} from "react-firebase-hooks/firestore";
-import {BoardItem, LaneType} from "./types";
+import {Board, BoardItem, LaneType} from "./types";
 import firebase from "firebase";
 import {BoardContext} from "./utils";
+
+
+export const useBoardList = () => {
+    return useCollection<Board>(
+        firebase.firestore()
+            .collection('boards'),
+        {
+            snapshotListenOptions: { includeMetadataChanges: true },
+        })
+}
 
 export const useQueryLaneItems = (lane: LaneType) => {
     const board = React.useContext(BoardContext)

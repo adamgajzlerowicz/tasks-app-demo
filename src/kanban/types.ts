@@ -6,3 +6,8 @@ export type BoardItem = {
     id: string
 }
 
+export type Board = {
+    title: string
+    num_tasks: number
+}
+

@@ -8,3 +8,5 @@ export const laneNames: Record<LaneType, string> = {
 }
 
 export const lanes = Object.keys(laneNames) as Array<LaneType>
+
+export const selectorHeight = 38
