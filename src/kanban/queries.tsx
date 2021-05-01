@@ -1,7 +1,8 @@
 import * as React from 'react'
 import {useCollection, useDocumentData} from "react-firebase-hooks/firestore";
 import {Board, BoardItem, LaneType} from "./types";
-import firebase from "firebase";
+import firebase from "firebase/app";
+
 import {BoardContext} from "./utils";
 
 

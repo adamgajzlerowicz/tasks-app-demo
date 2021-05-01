@@ -19,6 +19,6 @@ const Container = styled.div`
 
 export const Kanban = () => {
     return <Container>
-        {lanes.map((lane: LaneType) => <Lane lane={lane} /> )}
+        {lanes.map((lane: LaneType) => <Lane lane={lane} key={lane}/> )}
     </Container>
 }
