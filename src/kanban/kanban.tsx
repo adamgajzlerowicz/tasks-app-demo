@@ -15,6 +15,7 @@ const Container = styled.div`
   gap: ${mediumSize*2}px;
   background-color: ${colors.background};
   min-height: calc(100vh - ${selectorHeight}px);
+  min-width: 800px;
 `
 
 export const Kanban = () => {
