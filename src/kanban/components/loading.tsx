@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import styled from "styled-components";
+import {DualRing} from "react-spinners-css";
 
 const LoadingWrapper = styled.div`
   font-weight: bold;
@@ -9,5 +10,5 @@ const LoadingWrapper = styled.div`
 `
 
 export const Loading = () =>
-    <LoadingWrapper>...</LoadingWrapper>
+    <LoadingWrapper><DualRing color="black" size={30}/></LoadingWrapper>
 

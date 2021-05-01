@@ -2,7 +2,8 @@ import * as React from 'react'
 import styled from "styled-components";
 import {colors, mediumSize} from "../design-system";
 import {Lane} from "./components/lane";
-import {CandidatesLane} from "./components/candidatesLane";
+import {lanes} from "../constants";
+import {LaneType} from "./types";
 
 const Container = styled.div`
   padding-top: ${mediumSize}px;
@@ -18,9 +19,6 @@ const Container = styled.div`
 
 export const Kanban = () => {
     return <Container>
-        <CandidatesLane />
-        <Lane title="In Progress" items={[]}/>
-        <Lane title="QA / Code review" items={[]}/>
-        <Lane title="Completed" items={[]}/>
+        {lanes.map((lane: LaneType) => <Lane lane={lane} />)}
     </Container>
 }

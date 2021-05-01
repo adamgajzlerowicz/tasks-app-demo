@@ -1,11 +1,15 @@
 import * as React from 'react'
 import {LaneHeader} from "./laneHeader";
-import {BoardItem} from "../types";
+import {LaneType} from "../types";
 import {EmptyLane} from "./emptyLane";
 import {LaneItem} from "./laneItem";
 import {Stack} from "./stack";
 import {AddTaskButton} from "./addTaskButton";
 import styled from "styled-components";
+import { useQueryLaneItems} from "../queries";
+import {Loading} from "./loading";
+import {laneNames} from "../../constants";
+import {mediumSize} from "../../design-system";
 
 const LaneContainer = styled.div`
   display: flex;
@@ -17,27 +21,35 @@ const AddTaskButtonContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: ${mediumSize}px;
 `
 
 type Props = {
-    items: Array<BoardItem>
-    title: string
+    lane: LaneType
 }
 
-export const Lane = ({title, items}: Props) => {
+export const Lane = ({lane}: Props) => {
+    const [data, loading] = useQueryLaneItems(lane)
+
+    if (loading) {
+        return <Loading />
+    }
+
+    const ids = data?.docs.map(item => item.id) ?? []
+
     return <LaneContainer>
-        <LaneHeader title={title} />
+        <LaneHeader title={laneNames[lane]} lane={lane}/>
 
         <Stack/>
 
-        {items.length ?
+        {ids.length ?
             <>
-                {items.map((item, index) => <LaneItem item={item} key={index}/> )}
+                {ids.map((item, index) => <LaneItem id={item} key={index}/> )}
                 <AddTaskButtonContainer>
-                    <AddTaskButton />
+                    <AddTaskButton lane={lane} />
                 </AddTaskButtonContainer>
             </>
-            : <EmptyLane />
+            : <EmptyLane lane={lane} />
         }
 
     </LaneContainer>

@@ -1,7 +1,8 @@
-export type Lanes  = 'candidates' | 'inProgress' | 'codeReview' | 'completed'
+export type LaneType = 'candidates' | 'inProgress' | 'codeReview' | 'completed'
 
 export type BoardItem = {
     title: string,
-    currentLane: Lanes
+    currentLane: LaneType
     id: string
 }
+

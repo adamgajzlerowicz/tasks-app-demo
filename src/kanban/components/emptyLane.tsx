@@ -2,6 +2,7 @@ import * as React from 'react'
 import styled from "styled-components";
 import {borderRadius, colors, mediumSize} from "../../design-system";
 import {AddTaskButton} from "./addTaskButton";
+import {LaneType} from "../types";
 
 const EmptyLaneContainer = styled.div`
   background-color: ${colors.background2};
@@ -12,9 +13,12 @@ const EmptyLaneContainer = styled.div`
   flex-grow: 1;
 `
 
+type Props = {
+    lane: LaneType
+}
 
-export const EmptyLane = () => {
+export const EmptyLane = ({ lane }: Props) => {
     return <EmptyLaneContainer>
-        <AddTaskButton />
+        <AddTaskButton lane={lane}/>
     </EmptyLaneContainer>
 }

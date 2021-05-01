@@ -1,9 +1,12 @@
 import * as React from 'react'
-import {BoardItem} from "../types";
-import {BsArrowLeft, BsArrowRight, BsCheckCircle} from "react-icons/bs";
+import {BsCheckCircle} from "react-icons/bs";
 import styled from "styled-components";
 import {borderRadius, colors, mediumSize} from "../../design-system";
 import {RawButton} from "./rawButton";
+import {useUpdateTask, useTask} from "../queries";
+import {DeleteTask} from "./deleteTask";
+import {MoveLeft} from "./moveLeft";
+import {MoveRight} from "./moveRight";
 
 const LaneItemContainer = styled.div`
   padding: ${mediumSize}px;
@@ -12,6 +15,9 @@ const LaneItemContainer = styled.div`
   margin-bottom: ${mediumSize}px;
   min-height: 100px;
   box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 `
 
 const LaneItemInner = styled.div`
@@ -28,12 +34,20 @@ const Editable = styled(RawButton)`
   flex: 1
 `
 
+const RemoveContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end; 
+`
+
 type Props = {
-    item: BoardItem
+    id: string
 }
 
-export const LaneItem = ({ item }: Props) => {
+export const LaneItem = ({ id }: Props) => {
     const [isEditable, setIsEditable] = React.useState(false)
+    const [data] = useTask(id)
+    const saveTask = useUpdateTask(id)
     const textRef = React.useRef(null)
 
     return <LaneItemContainer>
@@ -52,16 +66,21 @@ export const LaneItem = ({ item }: Props) => {
                 contentEditable={isEditable}
                 suppressContentEditableWarning={true}
                 onBlur={(e) => {
+                    if (typeof e.currentTarget.textContent === 'string') {
+                        saveTask({...data, title: e.currentTarget.textContent})
+                    }
                     setIsEditable(false)
-                    console.log(e.currentTarget.textContent)
                 }}
                 >
-                {item.title}
+                {data?.title}
             </Editable>
 
-            <RawButton><BsArrowLeft/></RawButton>
+            <MoveLeft id={id}/>
 
-            <RawButton><BsArrowRight/></RawButton>
+            <MoveRight id={id}/>
+
         </LaneItemInner>
+
+        <RemoveContainer><DeleteTask id={id} /></RemoveContainer>
     </LaneItemContainer>
 }
