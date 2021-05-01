@@ -65,10 +65,12 @@ export const LaneItem = ({ id }: Props) => {
                 }}
                 contentEditable={isEditable}
                 suppressContentEditableWarning={true}
-                onBlur={(e) => {
+                onInput={(e) => {
                     if (typeof e.currentTarget.textContent === 'string') {
                         saveTask({...data, title: e.currentTarget.textContent})
                     }
+                }}
+                onBlur={(e) => {
                     setIsEditable(false)
                 }}
                 >

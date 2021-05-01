@@ -7,7 +7,8 @@ export const colors = {
     background2: '#EDF2F3',
     background3: '#fff',
     gray: "#A2A7AA",
-    gray2: "#848388"
+    gray2: "#848388",
+    error: "red"
 }
 
 
