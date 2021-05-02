@@ -8,7 +8,7 @@ To use the app, install the dependencies by running `yarn` and start by running 
 
 ## Testing
 
-Application has logic points tested with unit tests. To run tests please run `yarn test`. For the watch mode
+Application has logic points tested with unit tests. To run tests please run `yarn test`. For the watch mode use `yarn test:watch`
 
 ## Overview
 * Application uses Styled Components for namespaced css class names.
