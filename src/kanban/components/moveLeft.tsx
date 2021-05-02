@@ -2,8 +2,6 @@ import * as React from 'react'
 import {useTask, useUpdateTask} from "../queries";
 import {RawButton} from "./rawButton";
 import {BsArrowLeft} from "react-icons/bs";
-import {lanes} from "../../constants";
-import {LaneType} from "../types";
 import {canMoveLeft, getPreviousLane} from "../utils";
 
 type Props = {
