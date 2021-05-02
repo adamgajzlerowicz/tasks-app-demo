@@ -31,6 +31,7 @@ const CircleIcon = styled(BsCheckCircle)`
 `
 
 const Editable = styled(RawButton)`
+  min-height: ${mediumSize * 3}px;
   flex: 1
 `
 
