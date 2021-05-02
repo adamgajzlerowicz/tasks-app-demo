@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const MoveLeft = ({ id }: Props) => {
-    const editItem = useUpdateTask(id)
+    const editItem = useUpdateTask()
     const [data] = useTask(id)
 
     const canMoveLeft = data?.currentLane !== lanes[0] // TODO test
@@ -21,7 +21,7 @@ export const MoveLeft = ({ id }: Props) => {
     return <RawButton onClick={() => {
         if (data?.currentLane) {
             const newLane = lanes[lanes.indexOf(data.currentLane) -1] // TODO test
-            editItem({ currentLane: newLane })
+            editItem(id, { currentLane: newLane })
         }
     }}><BsArrowLeft/></RawButton>
 

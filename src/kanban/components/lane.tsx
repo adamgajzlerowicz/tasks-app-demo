@@ -21,5 +21,5 @@ export const Lane = ({lane}: Props) =>
     <LaneContainer>
         <LaneHeader title={laneNames[lane]} lane={lane}/>
         <Stack/>
-        <LaneContent lane={lane}/>
+        <LaneContent lane={lane} />
     </LaneContainer>

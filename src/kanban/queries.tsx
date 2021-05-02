@@ -43,17 +43,17 @@ export const useTask = (id: string) => {
         })
 }
 
-export const useUpdateTask = (id: string) => {
+export const useUpdateTask = () => {
     const board = React.useContext(BoardContext)
 
-    return React.useCallback( (data: Partial<BoardItem>) =>
+    return React.useCallback( (id: string, data: Partial<BoardItem>) =>
         firebase.firestore()
             .collection('boards')
             .doc(board)
             .collection('tasks')
             .doc(id)
             .update(data)
-    ,[board, id])
+    ,[board])
 }
 
 export const useCreateTask = () => {

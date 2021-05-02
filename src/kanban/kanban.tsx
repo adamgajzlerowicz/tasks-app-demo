@@ -4,6 +4,9 @@ import {colors, mediumSize} from "../design-system";
 import {Lane} from "./components/lane";
 import {lanes, selectorHeight} from "../constants";
 import {LaneType} from "./types";
+import { DragDropContext } from 'react-beautiful-dnd';
+import {useUpdateTask} from "./queries";
+import {isLane} from "./utils";
 
 const Container = styled.div`
   padding-top: ${mediumSize}px;
@@ -19,7 +22,15 @@ const Container = styled.div`
 `
 
 export const Kanban = () => {
+    const updateTask = useUpdateTask()
+
     return <Container>
-        {lanes.map((lane: LaneType) => <Lane lane={lane} key={lane}/> )}
+        <DragDropContext onDragEnd={async ({draggableId, destination}) => {
+            if (destination?.droppableId && isLane(destination.droppableId)) {
+                // await updateTask(draggableId, { currentLane: destination.droppableId})
+            }
+        }}>
+            {lanes.map((lane: LaneType) => <Lane lane={lane} key={lane}/> )}
+        </DragDropContext>
     </Container>
 }

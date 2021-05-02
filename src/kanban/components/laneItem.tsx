@@ -7,6 +7,7 @@ import {useUpdateTask, useTask} from "../queries";
 import {DeleteTask} from "./deleteTask";
 import {MoveLeft} from "./moveLeft";
 import {MoveRight} from "./moveRight";
+import {DraggableProvided} from "react-beautiful-dnd";
 
 const LaneItemContainer = styled.div`
   padding: ${mediumSize}px;
@@ -42,15 +43,19 @@ const RemoveContainer = styled.div`
 
 type Props = {
     id: string
+    provided: DraggableProvided
 }
 
-export const LaneItem = ({ id }: Props) => {
+export const LaneItem = ({ id, provided }: Props) => {
     const [isEditable, setIsEditable] = React.useState(false)
     const [data] = useTask(id)
-    const saveTask = useUpdateTask(id)
+    const saveTask = useUpdateTask()
     const textRef = React.useRef(null)
 
-    return <LaneItemContainer>
+    return <LaneItemContainer
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}>
         <LaneItemInner>
             <CircleIcon color={colors.gray2}/>
             <Editable
@@ -67,7 +72,7 @@ export const LaneItem = ({ id }: Props) => {
                 suppressContentEditableWarning={true}
                 onBlur={(e) => {
                     if (typeof e.currentTarget.textContent === 'string') {
-                        saveTask({title: e.currentTarget.textContent})
+                        saveTask(id, {title: e.currentTarget.textContent})
                     }
                     setIsEditable(false)
                 }}
