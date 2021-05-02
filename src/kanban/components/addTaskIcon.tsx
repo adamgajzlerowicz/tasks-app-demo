@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from "styled-components";
-import {colors, mediumSize} from "../../design-system";
+import {colors} from "../../design-system";
 import {BsPlus} from "react-icons/bs";
 import {RawButton} from "./rawButton";
 import {LaneType} from "../types";
@@ -13,19 +13,14 @@ const Typography = styled.h5`
   align-content: center;
 `
 
-const PlusIcon = styled(BsPlus)`
-  position: absolute;
-  left: -${mediumSize}px;
-`
-
 type Props = {
     lane: LaneType
 }
 
-export const AddTaskButton = ({ lane }: Props) => {
+export const AddTaskIcon = ({ lane }: Props) => {
     const createTask = useCreateTask()
 
     return <RawButton onClick={() => { createTask({currentLane: lane}) } }>
-        <Typography><PlusIcon /> Add task</Typography>
+        <Typography><BsPlus /> </Typography>
     </RawButton>
 }

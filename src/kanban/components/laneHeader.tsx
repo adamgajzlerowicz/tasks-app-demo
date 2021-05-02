@@ -3,16 +3,18 @@ import styled from "styled-components";
 import {BsLightningFill} from "react-icons/bs";
 import {colors} from "../../design-system";
 import {LaneType} from "../types";
-import {AddTaskButton} from "./addTaskButton";
 import {RawButton} from "./rawButton";
 import {isLastLane} from "../utils";
+import {AddTaskIcon} from "./addTaskIcon";
 
 const LaneHeaderContainer = styled.div`
   display: flex;  
   justify-content: space-between;
 `
 
-const LaneHeaderActions = styled.div``
+const LaneHeaderActions = styled.div`
+  display: flex;
+`
 
 type Props = {
     title: string
@@ -25,8 +27,8 @@ export const LaneHeader = ({ title, lane }: Props) => {
     return <LaneHeaderContainer>
         <h4>{title}</h4>
         <LaneHeaderActions>
-            <AddTaskButton lane={lane} showLabel={false} />
-            {showLightning && <RawButton onClick={() => alert('You are amazing!')}><BsLightningFill fill={colors.gold}/></RawButton>}
+            {showLightning ? <RawButton onClick={() => alert('You are amazing!')}><BsLightningFill fill={colors.gold}/></RawButton> : null}
+            <AddTaskIcon lane={lane} />
         </LaneHeaderActions>
     </LaneHeaderContainer>
 }
