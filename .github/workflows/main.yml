@@ -27,3 +27,5 @@ jobs:
       run: yarn
     - name: app test
       run: yarn test
+    - name: app Typescript
+      run: yarn compile
