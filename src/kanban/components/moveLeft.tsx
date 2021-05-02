@@ -3,6 +3,8 @@ import {useTask, useUpdateTask} from "../queries";
 import {RawButton} from "./rawButton";
 import {BsArrowLeft} from "react-icons/bs";
 import {lanes} from "../../constants";
+import {LaneType} from "../types";
+import {canMoveLeft, getPreviousLane} from "../utils";
 
 type Props = {
     id: string
@@ -12,17 +14,20 @@ export const MoveLeft = ({ id }: Props) => {
     const editItem = useUpdateTask(id)
     const [data] = useTask(id)
 
-    const canMoveLeft = data?.currentLane !== lanes[0] // TODO test
+    const movePossible = canMoveLeft(data?.currentLane)
 
-    if (!canMoveLeft) {
+    if (!movePossible) {
         return null
     }
 
-    return <RawButton onClick={() => {
-        if (data?.currentLane) {
-            const newLane = lanes[lanes.indexOf(data.currentLane) -1] // TODO test
-            editItem({ currentLane: newLane })
-        }
-    }}><BsArrowLeft/></RawButton>
+    return <RawButton
+        onClick={() => {
+            if (data?.currentLane) {
+                const newLane =  getPreviousLane(data.currentLane)
+                editItem({ currentLane: newLane })
+            }
+        }}>
+        <BsArrowLeft/>
+    </RawButton>
 
 }

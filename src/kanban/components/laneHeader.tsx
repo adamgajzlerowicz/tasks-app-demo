@@ -5,7 +5,7 @@ import {colors} from "../../design-system";
 import {LaneType} from "../types";
 import {AddTaskButton} from "./addTaskButton";
 import {RawButton} from "./rawButton";
-import {lanes} from "../../constants";
+import {isLastLane} from "../utils";
 
 const LaneHeaderContainer = styled.div`
   display: flex;  
@@ -20,7 +20,7 @@ type Props = {
 }
 
 export const LaneHeader = ({ title, lane }: Props) => {
-    const showLightning = lanes[lanes.length - 1] === lane // TODO test
+    const showLightning = isLastLane(lane)
 
     return <LaneHeaderContainer>
         <h4>{title}</h4>
